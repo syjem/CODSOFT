@@ -2,29 +2,38 @@ import { navLists } from '@/lib/nav-lists';
 import { iconMap } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { Link, useLocation } from 'react-router-dom';
+import { ReceiptText } from 'lucide-react';
 
-const Sidebar = () => {
+const Sidebar = ({ className }: { className?: string }) => {
   const location = useLocation();
 
   return (
-    <aside className="flex flex-col gap-2.5 w-full max-w-[250px] border-r h-full">
+    <aside
+      className={cn(
+        'flex flex-col gap-1 w-[250px] border-r h-full',
+        className
+      )}>
+      <div className="py-4 flex items-center justify-center gap-2 border-b shadow-sm cursor-default">
+        <ReceiptText />
+        <h1 className="text-xl  font-bold">Contact Manager</h1>
+      </div>
       {navLists.map((nav) => {
         const Icon = iconMap[nav.icon];
         return (
           <nav key={nav.label}>
             <Link
-              to={nav.route}
+              to={`/contacts/${nav.type}`}
               className={cn(
-                'flex py-2 items-center justify-start gap-4 rounded-md hover:bg-gray-100 px-4 text-sm font-medium transition-colors text-gray-700',
+                'flex py-3 items-center justify-start gap-6 rounded-md hover:bg-gray-100 px-4 text-base font-medium transition-colors text-gray-700',
                 {
-                  'text-black font-bold bg-gray-200':
-                    location.pathname === nav.route,
+                  'text-black font-bold bg-gray-200 hover:bg-gray-200':
+                    location.pathname === `/contacts/${nav.type}`,
                 }
               )}>
               {
                 <Icon
                   className={cn('h-5 w-5', {
-                    'text-black': location.pathname === nav.route,
+                    'text-black': location.pathname === `/contacts/${nav.type}`,
                   })}
                 />
               }

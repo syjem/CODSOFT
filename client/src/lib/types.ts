@@ -1,8 +1,9 @@
 import {
   ContactIcon,
-  ListTodoIcon,
-  LockIcon,
-  MessageSquareIcon,
+  Star,
+  Home,
+  BriefcaseBusiness,
+  Users,
   UserIcon,
 } from 'lucide-react';
 
@@ -12,18 +13,20 @@ interface IconMap {
 
 export const iconMap: IconMap = {
   ContactIcon: ContactIcon,
-  LockIcon: LockIcon,
-  ListTodoIcon: ListTodoIcon,
-  MessageSquareIcon: MessageSquareIcon,
+  Star: Star,
+  Home: Home,
+  Users: Users,
+  BriefcaseBusiness: BriefcaseBusiness,
   UserIcon: UserIcon,
 };
 
 export type TContact = {
-  id?: number;
-  first: string;
-  last: string;
+  id: number;
+  name: string;
   avatar: string;
   twitter: string;
+  phoneNumber: string;
+  email: string;
   notes: string;
   favorite: boolean;
 };

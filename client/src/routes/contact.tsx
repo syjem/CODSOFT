@@ -1,34 +1,54 @@
-import { Button } from '@/components/ui/button';
+// import { Button } from '@/components/ui/button';
 import { type TContact } from '@/lib/types';
-import { Form } from 'react-router-dom';
+import { Form, Link, useParams } from 'react-router-dom';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import { contacts } from '@/lib/data';
 
 const Contact = () => {
-  const contact = {
-    first: 'Jemuel',
-    last: 'Repoylo',
-    avatar:
-      'https://avatars.githubusercontent.com/u/119649793?s=400&u=888bd958f4bf62d27b31fcc52ab025ed8be77f58&v=4',
-    twitter: '@repoylo_jemuel',
-    notes: 'Mr. Right',
-    favorite: true,
-  };
+  const params = useParams();
+
+  const contact = contacts.find(
+    (contact) => contact.id === Number(params.contactId)
+  );
+
+  if (!contact) {
+    return <div>Contact not found</div>;
+  }
 
   return (
-    <div id="contact" className="flex max-w-[40rem]">
+    <div id="contact" className="flex flex-col gap-y-8 max-w-ful">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <Link
+              to="/contacts/all"
+              className="text-lg font-semibold text-slate-950/40">
+              Contacts
+            </Link>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage className="text-lg font-semibold text-slate-950">
+              {contact.name}
+            </BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
       <div className="size-[12rem] object-cover bg-[#c8c8c8] rounded-[1.5rem] mr-8 overflow-hidden">
-        <img
-          key={contact.avatar}
-          src={contact.avatar}
-          alt="kitten"
-          className="size-full"
-        />
+        <img src={contact.avatar} alt={contact.name} className="size-full" />
       </div>
 
       <div>
-        <h1 className="flex items-start gap-4 text-[2rem] font-bold m-0 active:outline-none active:text-active">
-          {contact.first} {contact.last}
+        <h2 className="flex items-start gap-4 text-[2rem] font-bold m-0 active:outline-none active:text-active">
+          {contact.name}
           <Favorite contact={contact} />
-        </h1>
+        </h2>
 
         {contact.twitter && (
           <p className="m-0">
@@ -45,7 +65,7 @@ const Contact = () => {
           <p className="whitespace-break-spaces">{contact.notes}</p>
         )}
 
-        <div>
+        {/* <div>
           <Form action="edit">
             <Button type="submit">Edit</Button>
           </Form>
@@ -59,7 +79,7 @@ const Contact = () => {
             }}>
             <Button type="submit">Delete</Button>
           </Form>
-        </div>
+        </div> */}
       </div>
     </div>
   );

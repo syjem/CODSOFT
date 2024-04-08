@@ -60,3 +60,26 @@ export const data = [
     address: '444 Hickory Street, Anyplace, USA',
   },
 ];
+
+export const contacts = [
+  {
+    id: 1,
+    name: 'Jemuel Repoylo',
+    avatar: 'https://avatars.githubusercontent.com/u/119649793?v=4',
+    twitter: '@repoylo_jemuel',
+    phoneNumber: '222-222-2222',
+    email: 'syjem.work@example.com',
+    notes: 'Mr. Right',
+    favorite: true,
+  },
+  {
+    id: 2,
+    name: 'Rodrick Alcantara',
+    avatar: 'https://avatars.githubusercontent.com/u/60320390?v=4',
+    twitter: '@constRod',
+    phoneNumber: '3313-8921-4231',
+    email: 'constRod@example.com',
+    notes: 'constRod',
+    favorite: false,
+  },
+];

@@ -1,22 +1,27 @@
 export const navLists = [
   {
-    label: 'Contact Book',
-    route: '/contact-book',
+    label: 'Contacts',
+    type: 'all',
     icon: 'ContactIcon',
   },
   {
-    label: 'Password Generator',
-    route: '/password-generator',
-    icon: 'LockIcon',
+    label: 'Favorites',
+    type: 'favorites',
+    icon: 'Star',
   },
   {
-    label: 'Todo List',
-    route: '/todo-list',
-    icon: 'ListTodoIcon',
+    label: 'Families',
+    type: 'families',
+    icon: 'Home',
   },
   {
-    label: 'Discussion',
-    route: '/discussion',
-    icon: 'MessageSquareIcon',
+    label: 'Friends',
+    type: 'friends',
+    icon: 'Users',
+  },
+  {
+    label: 'Work',
+    type: 'work',
+    icon: 'BriefcaseBusiness',
   },
 ];
