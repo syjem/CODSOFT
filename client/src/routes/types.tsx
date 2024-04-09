@@ -4,10 +4,7 @@ import Favorites from '@/components/favorites';
 import Families from '@/components/families';
 import Friends from '@/components/friends';
 import Work from '@/components/work';
-
-type ParamsType = {
-  type: 'all' | 'favorites' | 'families' | 'friends' | 'work';
-};
+import { ParamsType } from '@/lib/types';
 
 const Types = () => {
   const { type } = useParams() as ParamsType;

@@ -79,7 +79,7 @@ export const contacts = [
     twitter: '@constRod',
     phoneNumber: '3313-8921-4231',
     email: 'constRod@example.com',
-    notes: 'constRod',
+    notes: 'constRod champ',
     favorite: false,
   },
 ];
