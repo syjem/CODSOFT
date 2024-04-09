@@ -9,3 +9,5 @@ venv/
 *.cpython
 *.db
 __pycache__/
+
+migrations/
