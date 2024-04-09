@@ -30,3 +30,7 @@ export type TContact = {
   notes: string;
   favorite: boolean;
 };
+
+export type ParamsType = {
+  type: 'all' | 'favorites' | 'families' | 'friends' | 'work';
+};

@@ -9,6 +9,7 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { contacts } from '@/lib/data';
+import { getTypes } from '@/lib/utils';
 
 const Contact = () => {
   const params = useParams();
@@ -27,9 +28,9 @@ const Contact = () => {
         <BreadcrumbList>
           <BreadcrumbItem>
             <Link
-              to="/contacts/all"
+              to={`/contacts/${params.type}`}
               className="text-lg font-semibold text-slate-950/40">
-              Contacts
+              {getTypes(params.type as string)}
             </Link>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
