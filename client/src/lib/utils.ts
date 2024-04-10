@@ -25,6 +25,6 @@ export const getTypes = (type: string) => {
     case 'work':
       return 'Work';
     default:
-      break;
+      return 'Invalid type';
   }
 };
