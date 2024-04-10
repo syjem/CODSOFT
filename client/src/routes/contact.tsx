@@ -8,19 +8,20 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { contacts } from '@/lib/data';
 import { getTypes } from '@/lib/utils';
+import { getContactWithId } from '@/fetch/get';
+import { useQuery } from '@tanstack/react-query';
 
 const Contact = () => {
-  const params = useParams();
+  const { type, contactId } = useParams();
 
-  const contact = contacts.find(
-    (contact) => contact.id === Number(params.contactId)
-  );
+  const { data, isPending, isError, error } = useQuery({
+    queryKey: ['contact', contactId],
+    queryFn: () => getContactWithId(contactId as string),
+  });
 
-  if (!contact) {
-    return <div>Contact not found</div>;
-  }
+  if (isPending) return <div>Loading...</div>;
+  if (isError) return <div>Error: {error.message || 'Contact not found'} </div>;
 
   return (
     <div id="contact" className="flex flex-col gap-y-8 max-w-ful">
@@ -28,43 +29,41 @@ const Contact = () => {
         <BreadcrumbList>
           <BreadcrumbItem>
             <Link
-              to={`/contacts/${params.type}`}
+              to={`/contacts/${type}`}
               className="text-lg font-semibold text-slate-950/40">
-              {getTypes(params.type as string)}
+              {getTypes(type as string)}
             </Link>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbPage className="text-lg font-semibold text-slate-950">
-              {contact.name}
+              {data.name}
             </BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
       <div className="size-[12rem] object-cover bg-[#c8c8c8] rounded-[1.5rem] mr-8 overflow-hidden">
-        <img src={contact.avatar} alt={contact.name} className="size-full" />
+        <img src={data.avatar} alt={data.name} className="size-full" />
       </div>
 
       <div>
         <h2 className="flex items-start gap-4 text-[2rem] font-bold m-0 active:outline-none active:text-active">
-          {contact.name}
-          <Favorite contact={contact} />
+          {data.name}
+          <Favorite contact={data} />
         </h2>
 
-        {contact.twitter && (
+        {data.twitter && (
           <p className="m-0">
             <a
               target="_blank"
-              href={`https://twitter.com/${contact.twitter}`}
+              href={`https://twitter.com/${data.twitter}`}
               className="flex text-base text-[#3992ff] hover:underline">
-              {contact.twitter}
+              {data.twitter}
             </a>
           </p>
         )}
 
-        {contact.notes && (
-          <p className="whitespace-break-spaces">{contact.notes}</p>
-        )}
+        {data.notes && <p className="whitespace-break-spaces">{data.notes}</p>}
 
         {/* <div>
           <Form action="edit">
