@@ -21,51 +21,61 @@ const Contact = () => {
   });
 
   if (isPending) return <div>Loading...</div>;
-  if (isError) return <div>Error: {error.message || 'Contact not found'} </div>;
+  if (isError)
+    return <div>Error: {error.message || 'An error has occurred'} </div>;
 
   return (
-    <div id="contact" className="flex flex-col gap-y-8 max-w-ful">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <Link
-              to={`/contacts/${type}`}
-              className="text-lg font-semibold text-slate-950/40">
-              {getTypes(type as string)}
-            </Link>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage className="text-lg font-semibold text-slate-950">
-              {data.name}
-            </BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <div className="size-[12rem] object-cover bg-[#c8c8c8] rounded-[1.5rem] mr-8 overflow-hidden">
-        <img src={data.avatar} alt={data.name} className="size-full" />
-      </div>
+    <>
+      {data.message && <div>{data.message}</div>}
+      {data.contact && (
+        <div id="contact" className="flex flex-col gap-y-8 max-w-ful">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <Link
+                  to={`/contacts/${type}`}
+                  className="text-lg font-semibold text-slate-950/40">
+                  {getTypes(type as string)}
+                </Link>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage className="text-lg font-semibold text-slate-950">
+                  {data.contact.name}
+                </BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+          <div className="size-[12rem] object-cover bg-[#c8c8c8] rounded-[1.5rem] mr-8 overflow-hidden">
+            <img
+              src={data.contact.avatar}
+              alt={data.contact.name}
+              className="size-full"
+            />
+          </div>
 
-      <div>
-        <h2 className="flex items-start gap-4 text-[2rem] font-bold m-0 active:outline-none active:text-active">
-          {data.name}
-          <Favorite contact={data} />
-        </h2>
+          <div>
+            <h2 className="flex items-start gap-4 text-[2rem] font-bold m-0 active:outline-none active:text-active">
+              {data.contact.name}
+              <Favorite contact={data.contact} />
+            </h2>
 
-        {data.twitter && (
-          <p className="m-0">
-            <a
-              target="_blank"
-              href={`https://twitter.com/${data.twitter}`}
-              className="flex text-base text-[#3992ff] hover:underline">
-              {data.twitter}
-            </a>
-          </p>
-        )}
+            {data.contact.twitter && (
+              <p className="m-0">
+                <a
+                  target="_blank"
+                  href={`https://twitter.com/${data.contact.twitter}`}
+                  className="flex text-base text-[#3992ff] hover:underline">
+                  {data.contact.twitter}
+                </a>
+              </p>
+            )}
 
-        {data.notes && <p className="whitespace-break-spaces">{data.notes}</p>}
+            {data.contact.notes && (
+              <p className="whitespace-break-spaces">{data.contact.notes}</p>
+            )}
 
-        {/* <div>
+            {/* <div>
           <Form action="edit">
             <Button type="submit">Edit</Button>
           </Form>
@@ -80,8 +90,10 @@ const Contact = () => {
             <Button type="submit">Delete</Button>
           </Form>
         </div> */}
-      </div>
-    </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

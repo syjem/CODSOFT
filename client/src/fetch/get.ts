@@ -7,7 +7,7 @@ export const getContacts = async () => {
       throw new Error(`Request failed: ${res.status}`);
     }
     const data = await res.json();
-    return data.contacts;
+    return data;
   } catch (error) {
     console.error(error);
     throw new Error();
@@ -21,7 +21,21 @@ export const getContactWithId = async (id: string) => {
       throw new Error(`Request failed: ${res.status}`);
     }
     const data = await res.json();
-    return data.contact;
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error();
+  }
+};
+
+export const getFavoriteContacts = async () => {
+  try {
+    const res = await fetch(`${baseUrl}/contacts/favorites`);
+    if (!res.ok) {
+      throw new Error(`Request failed: ${res.status}`);
+    }
+    const data = await res.json();
+    return data;
   } catch (error) {
     console.error(error);
     throw new Error();

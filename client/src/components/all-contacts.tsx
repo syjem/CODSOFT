@@ -13,19 +13,25 @@ const AllContacts = () => {
   });
 
   if (isPending) return <div>Loading...</div>;
-  if (isError) return <div>Error: {error.message || 'An error occurred'}</div>;
+  if (isError)
+    return <div>Error: {error.message || 'An error has occurred'}</div>;
 
   return (
-    <div className="w-full">
-      <h2 className="text-lg font-semibold text-slate-950 mb-4 capitalize">
-        {type === 'all' && 'Contacts'}
-      </h2>
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        {data.map((contact: TContact) => (
-          <Cards key={contact.id} contact={contact} type={type} />
-        ))}
-      </div>
-    </div>
+    <>
+      {data.message && <div>{data.message}</div>}
+      {data.contacts && (
+        <div className="w-full">
+          <h2 className="text-lg font-semibold text-slate-950 mb-4 capitalize">
+            {type === 'all' && 'Contacts'}
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {data.contacts.map((contact: TContact) => (
+              <Cards key={contact.id} contact={contact} type={type} />
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
