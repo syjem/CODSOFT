@@ -8,9 +8,11 @@ class Contacts(Resource):
         if contact_id:
             contact = Contact.query.get(contact_id)
             if not contact:
-                return {'error': 'Contact not found'}, 404
+                return {'message': 'Contact not found'}, 200
             return {'contact': contact.print()}, 200
 
         else:
             contacts = Contact.query.all()
+            if not contacts:
+                return {'message': 'No contacts available'}, 200
             return {'contacts': [contact.print() for contact in contacts]}, 200
