@@ -107,7 +107,7 @@ const AddContactForm = () => {
             type="submit"
             disabled={form.formState.isSubmitting}
             className="w-1/3">
-            {form.formState.isSubmitting ? 'Adding' : 'Add'}
+            {form.formState.isSubmitting ? 'Adding' : 'Add Contact'}
             {form.formState.isSubmitting && (
               <Loader2 className="animate-spin h-5 w-5 ml-2" />
             )}
