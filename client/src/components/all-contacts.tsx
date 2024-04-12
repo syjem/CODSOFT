@@ -1,8 +1,9 @@
 import Cards from './cards';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getContacts } from '@/fetch/get';
 import { TContact } from '@/lib/types';
+import { Button } from '@/components/ui/button';
 
 const AllContacts = () => {
   const { type } = useParams();
@@ -21,9 +22,14 @@ const AllContacts = () => {
       {data.message && <div>{data.message}</div>}
       {data.contacts && (
         <div className="w-full">
-          <h2 className="text-lg font-semibold text-slate-950 mb-4 capitalize">
-            {type === 'all' && 'Contacts'}
-          </h2>
+          <div className="mb-4 flex justify-between items-center">
+            <h2 className="text-lg font-semibold text-slate-950 capitalize">
+              Contacts
+            </h2>
+            <Button asChild variant="ghost" className="font-semibold">
+              <Link to="/contacts/new">New</Link>
+            </Button>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {data.contacts.map((contact: TContact) => (
               <Cards key={contact.id} contact={contact} type={type} />
