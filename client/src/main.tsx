@@ -11,7 +11,7 @@ import Root from './routes/root.tsx';
 import ErrorPage from './error-page.tsx';
 import Types from './routes/types.tsx';
 import Contact from './routes/contact.tsx';
-import AddContactForm from './components/form.tsx';
+import AddContactForm from '@/components/form.tsx';
 
 const queryClient = new QueryClient();
 
@@ -42,7 +42,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={false} />
-      <Toaster />
+      <Toaster position="top-right" />
     </QueryClientProvider>
   </React.StrictMode>
 );
